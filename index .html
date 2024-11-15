@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madera Shopping</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: rgb(205, 205, 205);
+            font-family: system-ui;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 50px;
+            background-color: black;
+            transition: 0.5s linear;
+        }
+
+        .logo img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .navbar {
+            display: flex;
+            gap: 80px;
+        }
+
+        .navbar a {
+            padding: 10px 20px;
+            color:white;
+            font-size: 1rem;
+            text-transform: uppercase;
+            font-weight: 1000;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+            background:white;
+            color: black;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+            transition: 0.3s;
+        } 
+
+        .navbar a.active {
+            background:white;
+            color:black; 
+            border-radius: 20px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+        }
+
+        .header-icon {
+            font-size: 22px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .header-icon .bx {
+            color: white;
+        }
+
+        .search-icon {
+            cursor: pointer;
+        }
+
+        .search-bar-container {
+            display: none;
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            width: 300px;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgb(182, 173, 173);
+            border-radius: 5px;
+        }
+
+        .search-bar-container input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        
+        .sec {
+            padding: 10px 5%;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);  
+            gap: 80px;  
+            justify-items: center;
+            margin-top: 100px;  
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            width: 200%;
+            max-width: 215px; 
+            text-align: center;
+            box-shadow: 0px 10px 20px rgba(45, 44, 44, 0.1);
+            transition: transform 0.3s ease;
+            margin-top: 40;  
+        }
+
+        .card:hover {
+            transform: scale(0.9);
+        }
+
+        .card .img {
+            overflow: hidden;
+            border-radius: 10px;
+            border-radius: 10px;
+        }
+
+        .card .img img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .card .title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 5px;
+            margin-right: 100px;
+            white-space: nowrap;
+        }
+
+        .card .price {
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+            font-weight: bold;
+            margin-right: 100px;
+        }
+
+        .card .icon {
+            margin-top: 10px;
+            margin-left: 100px;
+        }
+
+        .notification {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color:black;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 16px;
+            z-index: 1000;
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2><a href="#" class="logo"><img src="photo_2024-11-14_20-09-28.jpg" alt="Logo"></a></h2>
+        <div class="navbar">
+            <a href="#" class="active">GAMES</a>
+            <a href="#">Tableaux</a>
+            <a href="#">Shelves</a>
+            <a href="#">Others</a>
+        </div>
+        <div class="header-icon">
+            <div class="search-icon" onclick="toggleSearchBar()">
+                <img src="search-regular-24.png" alt="Search" width="20px">
+            </div>
+        </div>
+    </header>
+    <div class="search-bar-container">
+        <input type="text" id="searchInput" placeholder="Search..." oninput="searchItems()">
+    </div>
+    
+    <section class="sec">
+        
+        <div class="card">
+            <div class="img">
+                <img src="e9502de7-6721-4376-a51d-477400d5287e.jfif" alt="Product Image">
+            </div>
+            <div class="title">Call of duty</div>
+            <div class="price">255 EGP</div>
+            <div class="icon"><a href="#" onclick="addToCart()"><img src="basket-solid-24.png" alt="Add to Cart"></a></div> 
+        </div>
+
+        <div class="card">
+            <div class="img">
+                <img src="f02fb8fc-f25d-46ad-9ef8-5674af8b43d0.jfif" alt="Product Image">
+            </div>
+            <div class="title">Shelf</div>
+            <div class="price">200 EGP</div>
+            <div class="icon"><a href="#" onclick="addToCart()"><img src="basket-solid-24.png" alt="Add to Cart"></a></div> 
+        </div>
+
+
+        <div class="card">
+            <div class="img">
+                <img src="d27f36c8-31c5-49a9-b16e-fb673394ac3e.jfif" alt="Product Image">
+            </div>
+            <div class="title">Gaming zone</div>
+            <div class="price">330 EGP</div>
+            <div class="icon"><a href="#" onclick="addToCart()"><img src="basket-solid-24.png" alt="Add to Cart"></a></div> 
+        </div>
+
+
+        <div class="card">
+            <div class="img">
+                <img src="cc816e2d-40e1-40bd-9269-8eed170a62cc.jfif" alt="Product Image">
+            </div>
+            <div class="title">Arary</div>
+            <div class="price">310 EGP</div>
+            <div class="icon"><a href="#" onclick="addToCart()"><img src="basket-solid-24.png" alt="Add to Cart"></a></div> 
+        </div>
+
+
+
+        <div class="card">
+            <div class="img">
+                <img src="a90576db-74c7-4029-9ed1-056afba42ec1.jfif" alt="Product Image">
+            </div>
+            <div class="title">Eat sleep game </div>
+            <div class="price">280 EGP</div>
+            <div class="icon"><a href="#" onclick="addToCart()"><img src="basket-solid-24.png" alt="Add to Cart"></a></div> 
+        </div>
+
+
+
+        <div class="card">
+            <div class="img">
+                <img src="649526ee-6923-4e2f-b15e-4c677ffa9e1a.jfif" alt="Product Image">
+            </div>
+            <div class="title">Spider</div>
+            <div class="price">300 EGP</div>
+            <div class="icon"><a href="#" onclick="addToCart()"><img src="basket-solid-24.png" alt="Add to Cart"></a></div> 
+        </div>
+
+
+        <div class="card">
+            <div class="img">
+                <img src="99390cc3-26d1-441e-8019-851fda301081.jfif" alt="Product Image">
+            </div>
+            <div class="title">PlayStation <p> Controller </p></div>
+            <div class="price">350 EGP</div>
+            <div class="icon"><a href="#" onclick="addToCart()"><img src="basket-solid-24.png" alt="Add to Cart"></a></div> 
+        </div>
+
+
+
+        <div class="card">
+            <div class="img">
+                <img src="120f26d7-13d8-4af3-9cce-d96ee8600eca.jfif" alt="Product Image">
+            </div>
+            <div class="title">🟠🟪🔺❌</div>
+            <div class="price">250 EGP</div>
+            <div class="icon"><a href="#" onclick="addToCart()"><img src="basket-solid-24.png" alt="Add to Cart"></a></div> 
+        </div>
+
+        <div class="card">
+            <div class="img">
+                <img src="84d2433b-2511-4cd5-b327-f575252e157c.jfif" alt="Product Image">
+            </div>
+            <div class="title">avengers Shelf</div>
+            <div class="price">650 EGP</div>
+            <div class="icon"><a href="#" onclick="addToCart()"><img src="basket-solid-24.png" alt="Add to Cart"></a></div> 
+        </div>
+
+
+        <div class="card">
+            <div class="img">
+                <img src="9ebff9d7-8b5c-45f7-acac-bbe99286fd68.jfif" alt="Product Image">
+            </div>
+            <div class="title">Superman</div>
+            <div class="price">280 EGP</div>
+            <div class="icon"><a href="#" onclick="addToCart()"><img src="basket-solid-24.png" alt="Add to Cart"></a></div> 
+        </div>
+
+
+        <div class="card">
+            <div class="img">
+                <img src="6ac602b4-9830-4e36-9b24-ecfa8622c3fd.jfif" alt="Product Image">
+            </div>
+            <div class="title">Batman</div>
+            <div class="price">230 EGP</div>
+            <div class="icon"><a href="#" onclick="addToCart()"><img src="basket-solid-24.png" alt="Add to Cart"></a></div> 
+        </div>
+
+
+        
+    </section>
+
+    <div class="notification">Item added to cart</div>
+   
+    <script>
+        function toggleSearchBar() {
+            const searchBar = document.querySelector('.search-bar-container');
+            searchBar.style.display = searchBar.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function searchItems() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                const title = card.querySelector('.title').textContent.toLowerCase();
+                if (title.includes(input)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function addToCart() {
+            let notification = document.querySelector('.notification');
+            notification.style.display = 'block';
+            notification.style.opacity = '1';
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 300);
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
+
